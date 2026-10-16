@@ -26,7 +26,6 @@ def registrar_solicitud(cliente, asunto):
 registrar_solicitud("Ana", "No conecta a Wi-Fi")
 registrar_solicitud("Luis", "Impresora sin papel")
 registrar_solicitud("Sofía", "Equipo lento")
-mostrar_estado()
 
 def atender_siguiente():
     if not cola_pendientes:
@@ -36,10 +35,6 @@ def atender_siguiente():
     solicitud["estado"] = "atendida"
     pila_historial.append(solicitud)
     return solicitud
-
-
-print("Atendida:", atender_siguiente())
-mostrar_estado()
 
 def deshacer_ultima_atencion():
     if not pila_historial:
@@ -51,5 +46,33 @@ def deshacer_ultima_atencion():
     return solicitud
 
 
-print("Restaurada:", deshacer_ultima_atencion())
-mostrar_estado()
+def ejecutar_menu():
+    while True:
+     try:
+         print("\n1. Registrar solicitud")
+         print("2. Atender siguiente")
+         print("3. Deshacer última atención")
+         print("4. Mostrar estado")
+         print("5. Salir")
+         opcion = input("Opción: ").strip()
+
+         if opcion == "1":
+            cliente = input("Cliente: ")
+            asunto = input("Asunto: ")
+            resultado = registrar_solicitud(cliente, asunto)
+            print("Registrada:", resultado if resultado else "Datos inválidos")
+         elif opcion == "2":
+            print("Atendida:", atender_siguiente())
+         elif opcion == "3":
+             print("Restaurada:", deshacer_ultima_atencion())
+         elif opcion == "4":
+            mostrar_estado()
+         elif opcion == "5":
+            break
+         else:
+            print("Opción inválida")
+     except ValueError:
+         print("Error, debe ser un numero. ")
+         
+if __name__ == "__main__":
+    ejecutar_menu()
