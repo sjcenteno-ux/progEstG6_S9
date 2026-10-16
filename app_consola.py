@@ -54,20 +54,20 @@ def ejecutar_menu():
          print("3. Deshacer última atención")
          print("4. Mostrar estado")
          print("5. Salir")
-         opcion = input("Opción: ").strip()
+         opcion = int(input("Opción: "))
 
-         if opcion == "1":
+         if opcion == 1:
             cliente = input("Cliente: ")
             asunto = input("Asunto: ")
             resultado = registrar_solicitud(cliente, asunto)
             print("Registrada:", resultado if resultado else "Datos inválidos")
-         elif opcion == "2":
+         elif opcion == 2:
             print("Atendida:", atender_siguiente())
-         elif opcion == "3":
+         elif opcion == 3:
              print("Restaurada:", deshacer_ultima_atencion())
-         elif opcion == "4":
+         elif opcion == 4:
             mostrar_estado()
-         elif opcion == "5":
+         elif opcion == 5:
             break
          else:
             print("Opción inválida")
