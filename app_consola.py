@@ -62,6 +62,15 @@ def buscar_solicitud(id_solicitud):
 
     return None
 
+def cancelar_pendiente(id_solicitud):
+
+    for i in range(len(cola_pendientes)):
+
+        if cola_pendientes[i]["id"] == id_solicitud:
+            return cola_pendientes.pop(i)
+
+    return None
+
 def ejecutar_menu():
     while True:
      try:
@@ -71,7 +80,8 @@ def ejecutar_menu():
          print("4. Mostrar estado")
          print("5. Consultar siguiente")
          print("6. Buscar solicitud por ID")
-         print("7. Salir")
+         print("7. Cancelar solicitud pendiente")
+         print("8. Salir")
          opcion = int(input("Opción: "))
 
          if opcion == 1:
@@ -99,6 +109,15 @@ def ejecutar_menu():
              else:
                  print("solicitud no encontrada.")
          elif opcion == 7:
+             id_solicitud = int(input("Ingrese el ID de la solicitud a cancelar:"))
+             resultado = cancelar_pendiente(id_solicitud)
+
+             if resultado:
+                 print("Solicitud cancelada:", resultado)
+             else:
+                 print("Solicitud no encontrada entre las pendientes.")
+
+         elif opcion == 8:
              break
          
          else:
