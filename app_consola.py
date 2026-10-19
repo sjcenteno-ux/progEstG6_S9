@@ -51,6 +51,16 @@ def consultar_siguiente():
 
     return cola_pendientes[0]
 
+def buscar_solicitud(id_solicitud):
+    for solicitud in cola_pendientes:
+        if solicitud["id"] == id_solicitud:
+            return solicitud, "pendiente"
+
+    for solicitud in pila_historial:
+        if solicitud["id"] == id_solicitud:
+            return solicitud, "historial"
+
+    return None
 
 def ejecutar_menu():
     while True:
@@ -60,7 +70,8 @@ def ejecutar_menu():
          print("3. Deshacer última atención")
          print("4. Mostrar estado")
          print("5. Consultar siguiente")
-         print("6. Salir")
+         print("6. Buscar solicitud por ID")
+         print("7. Salir")
          opcion = int(input("Opción: "))
 
          if opcion == 1:
@@ -77,7 +88,19 @@ def ejecutar_menu():
          elif opcion == 5:
             print("Siguiente:", consultar_siguiente())
          elif opcion == 6:
+             id_solicitud= int(input("Ingrese el ID de la solictud:"))
+
+             resultado= buscar_solicitud(id_solicitud)
+
+             if resultado:
+                 solicitud, ubicacion = resultado
+                 print("solicitud encontrada:", solicitud)
+                 print("Ubicacion:", ubicacion)
+             else:
+                 print("solicitud no encontrada.")
+         elif opcion == 7:
              break
+         
          else:
             print("Opción inválida")
      except ValueError:
