@@ -71,6 +71,23 @@ def cancelar_pendiente(id_solicitud):
 
     return None
 
+def deshacer_varias(cantidad):
+
+    if cantidad <= 0:
+        return "La cantidad debe ser un entero positivo."
+
+    recuperadas = 0
+
+    for i in range(cantidad):
+        resultado = deshacer_ultima_atencion()
+
+        if resultado is None:
+            break
+
+        recuperadas += 1
+
+    return f"Se recuperaron {recuperadas} solicitudes."
+
 def ejecutar_menu():
     while True:
      try:
@@ -81,7 +98,8 @@ def ejecutar_menu():
          print("5. Consultar siguiente")
          print("6. Buscar solicitud por ID")
          print("7. Cancelar solicitud pendiente")
-         print("8. Salir")
+         print("8.Eliminar varias atenciones.")
+         print("9.Salir")
          opcion = int(input("Opción: "))
 
          if opcion == 1:
@@ -118,8 +136,11 @@ def ejecutar_menu():
                  print("Solicitud no encontrada entre las pendientes.")
 
          elif opcion == 8:
+              cantidad = int(input("¿Cuantas atenciones desea deshacer?: "))
+              print(deshacer_varias(cantidad))
+             
+         elif opcion == 9:
              break
-         
          else:
             print("Opción inválida")
      except ValueError:
