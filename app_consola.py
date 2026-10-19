@@ -23,9 +23,9 @@ def registrar_solicitud(cliente, asunto):
     return solicitud
 
 
-registrar_solicitud("Ana", "No conecta a Wi-Fi")
-registrar_solicitud("Luis", "Impresora sin papel")
-registrar_solicitud("Sofía", "Equipo lento")
+#registrar_solicitud("Ana", "No conecta a Wi-Fi")
+#registrar_solicitud("Luis", "Impresora sin papel")
+#registrar_solicitud("Sofía", "Equipo lento")
 
 def atender_siguiente():
     if not cola_pendientes:
@@ -45,6 +45,12 @@ def deshacer_ultima_atencion():
     cola_pendientes.insert(0, solicitud)
     return solicitud
 
+def consultar_siguiente():
+    if not cola_pendientes:
+        return None
+
+    return cola_pendientes[0]
+
 
 def ejecutar_menu():
     while True:
@@ -53,7 +59,8 @@ def ejecutar_menu():
          print("2. Atender siguiente")
          print("3. Deshacer última atención")
          print("4. Mostrar estado")
-         print("5. Salir")
+         print("5. Consultar siguiente")
+         print("6. Salir")
          opcion = int(input("Opción: "))
 
          if opcion == 1:
@@ -68,7 +75,9 @@ def ejecutar_menu():
          elif opcion == 4:
             mostrar_estado()
          elif opcion == 5:
-            break
+            print("Siguiente:", consultar_siguiente())
+         elif opcion == 6:
+             break
          else:
             print("Opción inválida")
      except ValueError:
